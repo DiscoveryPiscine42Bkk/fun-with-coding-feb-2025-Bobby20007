@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #ft_list {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 2px solid black;
+            min-height: 100px;
+            text-align: left;
+        }
+        .todo-item {
+            background: lightgray;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">To Do List</div>
+    <button id="newTodoBtn">New</button>
+    <div id="ft_list"></div>
+    
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Todo JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Function to add a new Todo
+            function addTodo() {
+                let todoText = prompt("Enter your task:");
+                if (todoText && todoText.trim() !== "") {
+                    let todoItem = $("<div>").addClass("todo-item").text(todoText);
+                    todoItem.click(function() {
+                        if (confirm("Do you really want to remove this task?")) {
+                            todoItem.remove();
+                        }
+                    });
+                    $("#ft_list").prepend(todoItem); // Add the new item to the top
+                } else {
+                    alert("Task cannot be empty!");
+                }
+            }
+
+            // Attach click event to the "New" button
+            $("#newTodoBtn").click(function() {
+                addTodo();
+            });
+        });
+    </script>
+</body>
+</html>

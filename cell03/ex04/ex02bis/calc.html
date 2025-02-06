@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* กำหนดให้ body ใช้ flexbox */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center; /* จัดกลางในแนวนอน */
+            align-items: center;     /* จัดกลางในแนวตั้ง */
+            height: 100vh;           /* ความสูง 100% ของหน้าจอ */
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            font-size: 16px;
+            margin: 5px;
+            padding: 10px;
+            width: 180px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h1>Simple Calculator</h1>
+        <input type="number" id="leftOperand" min="0" placeholder="Enter number">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="number" id="rightOperand" min="0" placeholder="Enter number">
+        <button id="calculateBtn">Try me!</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Function to calculate the result
+            $("#calculateBtn").click(function() {
+                let left = $("#leftOperand").val();
+                let operator = $("#operator").val();
+                let right = $("#rightOperand").val();
+                
+                // ตรวจสอบค่าที่ใส่
+                if (left === "" || right === "" || left < 0 || right < 0 || isNaN(left) || isNaN(right)) {
+                    alert("Error :(");
+                    $("#result").text("");
+                    return;
+                }
+                
+                left = parseInt(left);
+                right = parseInt(right);
+                let result;
+                
+                // ตรวจสอบการหารหรือหาผลโมดูลัสโดย 0
+                if ((operator === "/" || operator === "%") && right === 0) {
+                    alert("It's over 9000!");
+                    console.log("It's over 9000!");
+                    $("#result").text("");
+                    return;
+                }
+                
+                // คำนวณตามตัวเลือก
+                switch(operator) {
+                    case "+": result = left + right; break;
+                    case "-": result = left - right; break;
+                    case "*": result = left * right; break;
+                    case "/": result = left / right; break;
+                    case "%": result = left % right; break;
+                }
+                
+                // แสดงผลลัพธ์ใน alert และ console
+                alert("Result: " + result);
+                console.log("Result: " + result);
+                $("#result").text("Result: " + result);
+            });
+
+            // แสดงการแจ้งเตือนทุก 30 วินาที
+            setInterval(function() {
+                alert("Please, use me...");
+            }, 30000);
+        });
+    </script>
+
+</body>
+</html>
