@@ -45,4 +45,7 @@ body {
     margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
